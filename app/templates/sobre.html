@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+  .github-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+</style>
+{% endblock %}
+
+{% block frame_title %}
+Sobre o Projeto
+{% endblock %}
+
+
+{% block content %}
+<main class="col-md-11 ms-md-auto col-lg-11 px-md-4">
+  <div class="row">
+    <div class="col-md-11 mt-3">
+      <!-- Objetivo -->
+      <section class="mb-4">
+        <h3 class="text-success">Objetivo</h3>
+        <p class="text-muted">
+          Este projeto foi desenvolvido como requisito parcial para a conclusão do curso de bacharelado em Sistemas de
+          Informação na PUC Minas São Gabriel (Turma 2024/01). A API REST será utilizada como base para um sistema
+          elaborado na disciplina Fundamentos de Sistemas de Informação. O tema abordado no projeto é o Ecoturismo, com
+          o
+          objetivo de promover os Objetivos para o Desenvolvimento Sustentável (ODS), incentivando práticas de turismo
+          sustentável e conscientização ambiental.
+        </p>
+      </section>
+
+      <!-- Tecnologias -->
+      <section class="mb-4">
+        <h3 class="text-success">Tecnologias</h3>
+        <p class="text-muted">
+          A API REST foi elaborada utilizando conceitos modernos e tecnologias robustas, incluindo:
+        </p>
+        <ul class="text-muted">
+          <li>Programação orientada a objetos para modularidade e reutilização de código</li>
+          <li>Implementação de regras de negócio para garantir a integridade dos processos</li>
+          <li>Banco de dados relacional MySQL para armazenamento estruturado e seguro</li>
+          <li>Mapeamento ORM com SQLAlchemy para abstração e manipulação de dados</li>
+          <li>Gerenciamento de seção e autenticação com Flask-Login</li>
+          <li>Utilização do framework Flask para construção da API RESTful</li>
+          <li>Desenvolvimento de sistemas distribuídos e integração com aplicações front-end</li>
+        </ul>
+      </section>
+
+      <!-- Link para o repositório do GitHub -->
+      <section>
+        <h3 class="text-success">Repositório do Projeto</h3>
+        <a href="https://github.com/humbertosamora/flask-ecoturismo" class="text-dark" target="_blank">
+          <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"
+            class="github-icon">
+          flask-ecoturismo
+        </a>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}

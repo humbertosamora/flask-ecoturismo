@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block frame_title %}
+Empresas
+{% endblock %}
+
+{% block content %}
+<main class="col-md-11 ms-md-auto col-lg-11 px-md-4">
+  <div class="row">
+    <div class="col-md-11 mt-3">
+      <section class="mb-4">
+        <h3 class="text-success">Observações Gerais</h3>
+        <ul>
+          <li>O formulário deve incluir o atributo <strong>enctype="multipart/form-data"</strong> para permitir o envio
+            de
+            arquivos.</li>
+          <li>A imagem é armazenada no banco de dados no formato <strong>Blob</strong> e retornada para o cliente
+            codificada em <strong>Base64</strong>, pois o formato JSON aceita apenas texto.</li>
+        </ul>
+      </section>
+
+      <section class="mb-4">
+        <h3 class="text-success">Rotas</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>GET /empresas</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Nenhuma.</li>
+              <li><strong>Retorno:</strong> Lista de empresas em formato JSON.</li>
+              <li><strong>Exemplo de retorno:</strong></li>
+              <pre class="bg-light p-3 rounded">
+[
+  {
+    <span class="json-key">"id"</span>: <span class="json-number">1</span>,
+    <span class="json-key">"nome"</span>: <span class="json-string">"EcoTur"</span>,
+    <span class="json-key">"cnpj"</span>: <span class="json-string">"12.345.678/0001-90"</span>,
+    <span class="json-key">"email"</span>: <span class="json-string">"contato@ecotur.com"</span>,
+    <span class="json-key">"site"</span>: <span class="json-string">"https://ecotur.com"</span>,
+    <span class="json-key">"instagram"</span>: <span class="json-string">"https://instagram.com/ecotur"</span>,
+    <span class="json-key">"facebook"</span>: <span class="json-string">"https://facebook.com/ecotur"</span>,
+    <span class="json-key">"tiktok"</span>: <span class="json-string">"https://tiktok.com/@ecotur"</span>,
+    <span class="json-key">"youtube"</span>: <span class="json-string">"https://youtube.com/ecotur"</span>,
+    <span class="json-key">"imagem"</span>: <span class="json-string">"base64_encoded_image"</span>
+  },
+  {
+    <span class="json-key">"id"</span>: <span class="json-number">2</span>,
+    <span class="json-key">"nome"</span>: <span class="json-string">"Natureza Viva"</span>,
+    <span class="json-key">"cnpj"</span>: <span class="json-string">"98.765.432/0001-09"</span>,
+    <span class="json-key">"email"</span>: <span class="json-string">"info@naturezaviva.com"</span>,
+    <span class="json-key">"site"</span>: <span class="json-string">"https://naturezaviva.com"</span>,
+    <span class="json-key">"instagram"</span>: <span class="json-string">"https://instagram.com/naturezaviva"</span>,
+    <span class="json-key">"facebook"</span>: <span class="json-string">"https://facebook.com/naturezaviva"</span>,
+    <span class="json-key">"tiktok"</span>: <span class="json-string">""</span>,
+    <span class="json-key">"youtube"</span>: <span class="json-string">""</span>,
+    <span class="json-key">"imagem"</span>: <span class="json-string">""</span>
+  }
+]</pre>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <strong>GET /empresas/&lt;id&gt;</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Nenhuma.</li>
+              <li><strong>Retorno:</strong> Detalhes de uma empresa específica em JSON.</li>
+              <li><strong>Exemplo de retorno:</strong></li>
+              <pre class="bg-light p-3 rounded">
+{
+  <span class="json-key">"id"</span>: <span class="json-number">1</span>,
+  <span class="json-key">"nome"</span>: <span class="json-string">"EcoTur"</span>,
+  <span class="json-key">"cnpj"</span>: <span class="json-string">"12.345.678/0001-90"</span>,
+  <span class="json-key">"email"</span>: <span class="json-string">"contato@ecotur.com"</span>,
+  <span class="json-key">"site"</span>: <span class="json-string">"https://ecotur.com"</span>,
+  <span class="json-key">"instagram"</span>: <span class="json-string">"https://instagram.com/ecotur"</span>,
+  <span class="json-key">"facebook"</span>: <span class="json-string">"https://facebook.com/ecotur"</span>,
+  <span class="json-key">"tiktok"</span>: <span class="json-string">"https://tiktok.com/@ecotur"</span>,
+  <span class="json-key">"youtube"</span>: <span class="json-string">"https://youtube.com/ecotur"</span>,
+  <span class="json-key">"imagem"</span>: <span class="json-string">"base64_encoded_image"</span>
+}</pre>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <strong>POST /empresas</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Apenas para administradores.</li>
+              <li><strong>Campos do formulário:</strong></li>
+              <ul>
+                <li>nome: Nome da empresa <strong>(obrigatório)</strong></li>
+                <li>cnpj: CNPJ da empresa</li>
+                <li>email: Email da empresa</li>
+                <li>site: Site oficial da empresa</li>
+                <li>instagram: Link para o perfil do Instagram</li>
+                <li>facebook: Link para o perfil do Facebook</li>
+                <li>tiktok: Link para o perfil do TikTok</li>
+                <li>youtube: Link para o canal do YouTube</li>
+                <li>imagem: Arquivo da imagem (campo do tipo "file")</li>
+              </ul>
+              <li><strong>Retorno:</strong> JSON com os dados da empresa criada.</li>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <strong>PUT /empresas/&lt;id&gt;</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Apenas para administradores.</li>
+              <li><strong>Campos do formulário:</strong></li>
+              <ul>
+                <li>nome: Nome atualizado <strong>(obrigatório)</strong></li>
+                <li>email: Email atualizado</li>
+                <li>site: Site atualizado</li>
+                <li>instagram: Instagram atualizado</li>
+                <li>facebook: Facebook atualizado</li>
+                <li>tiktok: TikTok atualizado</li>
+                <li>youtube: YouTube atualizado</li>
+                <li>imagem: Arquivo da imagem (campo do tipo "file")</li>
+              </ul>
+              <li><strong>Retorno:</strong> JSON com os dados atualizados da empresa.</li>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <strong>DELETE /empresas/&lt;id&gt;</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Apenas para administradores.</li>
+              <li><strong>Retorno:</strong> JSON confirmando a exclusão.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block frame_title %}
+Usuários
+{% endblock %}
+
+{% block content %}
+<main class="col-md-11 ms-md-auto col-lg-11 px-md-4">
+  <div class="row">
+    <div class="col-md-11 mt-3">
+      <h3 class="text-success">Rotas</h3>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>GET /usuarios</strong>
+          <ul>
+            <li><strong>Restrição:</strong> Apenas para administradores.</li>
+            <li><strong>Retorno:</strong> Lista de usuários em formato JSON.</li>
+            <li><strong>Exemplo de retorno:</strong></li>
+            <pre class="bg-light p-3 rounded">
+[
+  {
+    <span class="json-key">"id"</span>: <span class="json-number">1</span>,
+    <span class="json-key">"nome"</span>: <span class="json-string">"João da Silva"</span>,
+    <span class="json-key">"nick"</span>: <span class="json-string">"Silva+10"</span>,
+    <span class="json-key">"email"</span>: <span class="json-string">"joao.silva@example.com"</span>
+  },
+  {
+    <span class="json-key">"id"</span>: <span class="json-number">2</span>,
+    <span class="json-key">"nome"</span>: <span class="json-string">"Maria Souza"</span>,
+    <span class="json-key">"nick"</span>: <span class="json-string">"m_Silva"</span>,
+    <span class="json-key">"email"</span>: <span class="json-string">"maria.souza@example.com"</span>
+  }
+]</pre>
+          </ul>
+        </li>
+        <li class="list-group-item">
+          <strong>GET /usuarios/&lt;id&gt;</strong>
+          <ul>
+            <li><strong>Restrição:</strong> Administradores ou usuário logado com mesmo &lt;id&gt; solicitado.</li>
+            <li><strong>Retorno:</strong> Detalhes de um usuário específico em JSON.</li>
+            <li><strong>Exemplo de retorno:</strong></li>
+            <pre class="bg-light p-3 rounded">
+{
+  <span class="json-key">"id"</span>: <span class="json-number">1</span>,
+  <span class="json-key">"nome"</span>: <span class="json-string">"João da Silva"</span>,
+  <span class="json-key">"nick"</span>: <span class="json-string">"Silva+10"</span>,
+  <span class="json-key">"email"</span>: <span class="json-string">"joao.silva@example.com"</span>
+}</pre>
+          </ul>
+        </li>
+        <li class="list-group-item">
+          <strong>POST /usuarios</strong>
+          <ul>
+            <li><strong>Restrição:</strong> Nenhuma.</li>
+            <li><strong>Campos enviados:</strong> Devem ser enviados via formulário.</li>
+            <li>
+              <strong>Campos do formulário:</strong>
+              <ul>
+                <li>nome: Nome do usuário</li>
+                <li>email: Email do usuário</li>
+                <li>nick: Apelido do usuário <strong>(opcional)</strong></li>
+                <li>senha: Senha do usuário</li>
+                <li>senha_confirmacao: Confirmação da senha do usuário</li>
+              </ul>
+            </li>
+            <li><strong>Retorno:</strong> JSON com os dados do usuário criado.</li>
+          </ul>
+        </li>
+        <li class="list-group-item">
+          <strong>PUT /usuarios/&lt;id&gt;</strong>
+          <ul>
+            <li><strong>Restrição: </strong>Administradores ou usuário logado com mesmo &lt;id&gt; solicitado.</li>
+            <li><strong>Campos enviados:</strong> Devem ser enviados via formulário.</li>
+            <li>
+              <strong>Campos do formulário:</strong>
+              <ul>
+                <li>nome: Nome atualizado</li>
+                <li>email: Email atualizado</li>
+                <li>nick: Apelido atualizado <strong>(opcional)</strong></li>
+                <li>senha_atual: Senha atual <strong>(opcional*)</strong></li>
+                <li>senha_nova: Nova senha <strong>(opcional*)</strong></li>
+                <li>senha_confirmacao: Confirmação da nova senha <strong>(opcional*)</strong></li>
+                <span><strong>*Caso não deseje atualiar a senha.</strong></span>
+              </ul>
+            </li>
+            <li><strong>Retorno:</strong> JSON com os dados atualizados do usuário.</li>
+          </ul>
+        </li>
+        <li class="list-group-item">
+          <strong>DELETE /usuarios/&lt;id&gt;</strong>
+          <ul>
+            <li><strong>Restrição:</strong> Apenas para administradores.</li>
+            <li><strong>Retorno:</strong> JSON confirmando a exclusão.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</main>
+{% endblock %}

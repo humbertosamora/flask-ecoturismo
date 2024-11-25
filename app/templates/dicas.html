@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block frame_title %}
+Rotas de Dicas
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block content %}
+<main class="col-md-12 ms-md-auto col-lg-12 px-md-4">
+  <div class="row">
+    <div class="col-md-12 mt-3">
+      <section class="mb-4">
+        <h3 class="text-success">Observações Gerais</h3>
+        <ul>
+          <li>O campo <strong>id_usuario</strong> representa o identificador do usuário que criou o registro.</li>
+          <li>Os campos iniciados por "flag" indicam se a informação se aplica a um tópico específico descrito pelo flag
+            (por
+            exemplo, praia, montanha, etc.).</li>
+          <li>Um usuário só pode alterar ou excluir as dicas cadastradas por si mesmo. O administrador, no entanto,
+            possui
+            controle total sobre qualquer dica.</li>
+        </ul>
+      </section>
+
+      <section class="mb-4">
+        <h3 class="text-success">Rotas</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>GET /dicas</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Nenhuma.</li>
+              <li><strong>Retorno:</strong> Lista de dicas em formato JSON.</li>
+              <li><strong>Exemplo de retorno:</strong></li>
+              <pre class="bg-light p-3 rounded">
+[
+  {
+    <span class="json-key">"id"</span>: <span class="json-number">1</span>,
+    <span class="json-key">"id_usuario"</span>: <span class="json-number">3</span>,
+    <span class="json-key">"titulo"</span>: <span class="json-string">"Trilha Segura"</span>,
+    <span class="json-key">"descricao"</span>: <span class="json-string">"Sempre leve água, protetor solar e calçados adequados."</span>,
+    <span class="json-key">"lugar"</span>: <span class="json-string">"Parque Nacional da Chapada"</span>,
+    <span class="json-key">"link"</span>: <span class="json-string">"https://trilhasegura.com"</span>,
+    <span class="json-key">"flag_praia"</span>: <span class="json-boolean">False</span>,
+    <span class="json-key">"flag_montanha"</span>: <span class="json-boolean">True</span>,
+    <span class="json-key">"flag_cachoeira"</span>: <span class="json-boolean">True</span>,
+    <span class="json-key">"flag_camping"</span>: <span class="json-boolean">True</span>,
+    <span class="json-key">"flag_vestuario"</span>: <span class="json-boolean">False</span>,
+    <span class="json-key">"flag_alimentacao"</span>: <span class="json-boolean">True</span>
+  },
+  {
+    <span class="json-key">"id</span>": <span class="json-number">2</span>,
+    <span class="json-key">"id_usuario</span>": <span class="json-number">5</span>,
+    <span class="json-key">"titulo"</span>: <span class="json-string">"Camping Sustentável"</span>,
+    <span class="json-key">"descricao"</span>: <span class="json-string">"Utilize barracas de material reciclável e sempre recolha todo o lixo produzido."</span>,
+    <span class="json-key">"lugar"</span>: <span class="json-string">"Reserva Ecológica do Tinguá"</span>,
+    <span class="json-key">"link"</span>: <span class="json-string">"https://campingsustentavel.com"</span>,
+    <span class="json-key">"flag_praia"</span>: <span class="json-boolean">False</span>,
+    <span class="json-key">"flag_montanha"</span>: <span class="json-boolean">True</span>,
+    <span class="json-key">"flag_cachoeira"</span>: <span class="json-boolean">True</span>,
+    <span class="json-key">"flag_camping"</span>: <span class="json-boolean">True</span>,
+    <span class="json-key">"flag_vestuario"</span>: <span class="json-boolean">True</span>,
+    <span class="json-key">"flag_alimentacao"</span>: <span class="json-boolean">True</span>
+  }
+]</pre>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <strong>GET /dicas/&lt;id&gt;</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Nenhuma.</li>
+              <li><strong>Retorno:</strong> Detalhes de uma dica específica em JSON.</li>
+              <li><strong>Exemplo de retorno:</strong></li>
+              <pre class="bg-light p-3 rounded">
+{
+  <span class="json-key">"id"</span>: <span class="json-number">1</span>,
+  <span class="json-key">"id_usuario"</span>: <span class="json-number">3</span>,
+  <span class="json-key">"titulo"</span>: <span class="json-string">"Trilha Segura"</span>,
+  <span class="json-key">"descricao"</span>: <span class="json-string">"Sempre leve água, protetor solar e calçados adequados."</span>,
+  <span class="json-key">"lugar"</span>: <span class="json-string">"Parque Nacional da Chapada"</span>,
+  <span class="json-key">"link"</span>: <span class="json-string">"https://trilhasegura.com"</span>,
+  <span class="json-key">"flag_praia"</span>: <span class="json-boolean">False</span>,
+  <span class="json-key">"flag_montanha"</span>: <span class="json-boolean">True</span>,
+  <span class="json-key">"flag_cachoeira"</span>: <span class="json-boolean">True</span>,
+  <span class="json-key">"flag_camping"</span>: <span class="json-boolean">True</span>,
+  <span class="json-key">"flag_vestuario"</span>: <span class="json-boolean">False</span>,
+  <span class="json-key">"flag_alimentacao"</span>: <span class="json-boolean">True</span>
+}</pre>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <strong>POST /dicas</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Apenas para usuários autenticados.</li>
+              <li><strong>Campos do formulário:</strong></li>
+              <ul>
+                <li>titulo: Título da dica <strong>(obrigatório)</strong></li>
+                <li>descricao: Descrição detalhada da dica <strong>(obrigatório)</strong></li>
+                <li>lugar: Local relacionado à dica (caso seja específica)</li>
+                <li>link: Link para mais informações</li>
+                <li>flag_praia: True/False</li>
+                <li>flag_montanha: True/False</li>
+                <li>flag_cachoeira: True/False</li>
+                <li>flag_camping: True/False</li>
+                <li>flag_vestuario: True/False</li>
+                <li>flag_alimentacao: True/False</li>
+              </ul>
+              <li><strong>Retorno:</strong> JSON com os dados da dica criada.</li>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <strong>PUT /dicas/&lt;id&gt;</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Apenas para usuários autenticados.</li>
+              <li><strong>Campos do formulário:</strong></li>
+              <ul>
+                <li>titulo: Título atualizado <strong>(obrigatório)</strong></li>
+                <li>descricao: Descrição atualizada <strong>(obrigatório)</strong></li>
+                <li>lugar: Local atualizado</li>
+                <li>link: Link atualizado</li>
+                <li>flag_praia: True/False</li>
+                <li>flag_montanha: True/False</li>
+                <li>flag_cachoeira: True/False</li>
+                <li>flag_camping: True/False</li>
+                <li>flag_vestuari True/False</li>
+                <li>flag_alimentaca True/False</li>
+              </ul>
+              <li><strong>Retorno:</strong> JSON com os dados atualizados da dica.</li>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <strong>DELETE /dicas/&lt;id&gt;</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Apenas para usuários autenticados.</li>
+              <li><strong>Retorno:</strong> JSON confirmando a exclusão.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}

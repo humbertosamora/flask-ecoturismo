@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block frame_title %}
+Logout
+{% endblock %}
+
+{% block content %}
+<main class="col-md-11 ms-md-auto col-lg-11 px-md-4">
+  <div class="row">
+    <div class="col-md-11 mt-3">
+      <section class="mb-4">
+        <h3 class="text-success mt-3">Rotas</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>POST /logout</strong>
+            <ul>
+              <li><strong>Restrição:</strong> Usuário autenticado.</li>
+              <li><strong>Retorno:</strong> JSON confirmando o logout.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}
