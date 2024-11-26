@@ -1,3 +1,4 @@
+import os
 import json
 from flask import Blueprint
 from flask import request
@@ -5,6 +6,7 @@ from flask import jsonify
 from flask import Response
 from flask import render_template
 from flask_cors import cross_origin
+from flask import send_from_directory
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
@@ -23,6 +25,14 @@ bcrypt = Bcrypt()
 @cross_origin()
 def index():
     return render_template("index.html")
+
+
+@bp_default.route('/favicon.ico')
+@cross_origin()
+def favicon():
+    print(bp_default.root_path)
+    return send_from_directory(os.path.join(bp_default.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 @bp_default.route("/login", methods=["POST"])
@@ -66,6 +76,5 @@ def logout():
 
 
 @lm.user_loader
-@cross_origin()
 def load_user(user_id):
     return Usuario.query.get(int(user_id))
