@@ -5,7 +5,6 @@ from flask import request
 from flask import jsonify
 from flask import Response
 from flask import render_template
-from flask_cors import cross_origin
 from flask import send_from_directory
 from flask_login import login_user
 from flask_login import logout_user
@@ -13,7 +12,6 @@ from flask_login import login_required
 from flask_bcrypt import Bcrypt
 
 from .usuarios import Usuario
-from ..login_manager import lm
 
 bp_default = Blueprint("default", __name__, template_folder="templates")
 
@@ -22,13 +20,11 @@ bcrypt = Bcrypt()
 
 @bp_default.route("/")
 @bp_default.route("/index")
-@cross_origin()
 def index():
     return render_template("index.html")
 
 
 @bp_default.route('/favicon.ico')
-@cross_origin()
 def favicon():
     print(bp_default.root_path)
     return send_from_directory(os.path.join(bp_default.root_path, 'static'),
@@ -36,7 +32,6 @@ def favicon():
 
 
 @bp_default.route("/login", methods=["POST"])
-@cross_origin()
 def login():
     try:
         email = request.form.get("email")
@@ -69,12 +64,6 @@ def login():
 
 @bp_default.route("/logout", methods=["POST"])
 @login_required
-@cross_origin()
 def logout():
     logout_user()
     return jsonify({"mensagem": "Logout realizado com sucesso."})
-
-
-@lm.user_loader
-def load_user(user_id):
-    return Usuario.query.get(int(user_id))

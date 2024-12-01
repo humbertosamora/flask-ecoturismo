@@ -3,7 +3,6 @@ from flask import jsonify
 from flask import Blueprint
 from flask import request
 from flask import Response
-from flask_cors import cross_origin
 from flask_login import current_user
 from flask_login import login_required
 
@@ -15,7 +14,6 @@ bp_dicas = Blueprint("dicas", __name__, template_folder="templates")
 
 
 @bp_dicas.route("/", methods=["GET"])
-@cross_origin()
 def retrieve_all():
     try:
         dicas = Dica.query.all()
@@ -34,7 +32,6 @@ def retrieve_all():
 
 
 @bp_dicas.route("/<int:id>", methods=["GET"])
-@cross_origin()
 def retrieve(id):
     try:
         d = Dica.query.get(id)
@@ -56,7 +53,6 @@ def retrieve(id):
 
 @bp_dicas.route("/", methods=["POST"])
 @login_required
-@cross_origin()
 def create():
     try:
         id_usuario = current_user.id
@@ -94,7 +90,6 @@ def create():
 
 @bp_dicas.route("/<int:id>", methods=["PUT"])
 @login_required
-@cross_origin()
 def update(id):
     try:
         d = Dica.query.get(id)
@@ -152,7 +147,6 @@ def update(id):
 
 @bp_dicas.route("/<int:id>", methods=["DELETE"])
 @login_required
-@cross_origin()
 def delete(id):
     try:
         d = Dica.query.get(id)

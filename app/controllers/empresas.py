@@ -3,7 +3,6 @@ from flask import jsonify
 from flask import Blueprint
 from flask import request
 from flask import Response
-from flask_cors import cross_origin
 from flask_login import current_user
 from flask_login import login_required
 
@@ -15,7 +14,6 @@ bp_empresas = Blueprint("empresas", __name__, template_folder="templates")
 
 
 @bp_empresas.route("/", methods=["GET"])
-@cross_origin()
 def retrieve_all():
     try:
         empresas = Empresa.query.all()
@@ -34,7 +32,6 @@ def retrieve_all():
 
 
 @bp_empresas.route("/<int:id>", methods=["GET"])
-@cross_origin()
 def retrieve(id):
     try:
         e = Empresa.query.get(id)
@@ -56,7 +53,6 @@ def retrieve(id):
 
 @bp_empresas.route("/", methods=["POST"])
 @login_required
-@cross_origin()
 def create():
     try:
         if not current_user.flag_admin:
@@ -98,7 +94,6 @@ def create():
 
 @bp_empresas.route("/<int:id>", methods=["PUT"])
 @login_required
-@cross_origin()
 def update(id):
     try:
         if not current_user.flag_admin:
@@ -158,7 +153,6 @@ def update(id):
 
 @bp_empresas.route("/<int:id>", methods=["DELETE"])
 @login_required
-@cross_origin()
 def delete(id):
     try:
         if not current_user.flag_admin:

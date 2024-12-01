@@ -5,7 +5,6 @@ from flask import Blueprint
 from flask import request
 from flask import Response
 from flask_bcrypt import Bcrypt
-from flask_cors import cross_origin
 from flask_login import current_user
 from flask_login import login_required
 
@@ -20,7 +19,6 @@ bcrypt = Bcrypt()
 
 @bp_usuarios.route("/", methods=["GET"])
 @login_required
-@cross_origin()
 def retrieve_all():
     try:
         if not current_user.flag_admin:
@@ -47,7 +45,6 @@ def retrieve_all():
 
 @bp_usuarios.route("/<int:id>", methods=["GET"])
 @login_required
-@cross_origin()
 def retrieve(id):
     try:
         u = Usuario.query.get(id)
@@ -75,7 +72,6 @@ def retrieve(id):
 
 
 @bp_usuarios.route("/", methods=["POST"])
-@cross_origin()
 def create():
     try:
         nome = request.form.get("nome")
@@ -113,7 +109,6 @@ def create():
 
 @bp_usuarios.route("/<int:id>", methods=["PUT"])
 @login_required
-@cross_origin()
 def update(id):
     try:
         u = Usuario.query.get(id)
@@ -188,7 +183,6 @@ def update(id):
 
 @bp_usuarios.route("/<int:id>", methods=["DELETE"])
 @login_required
-@cross_origin()
 def delete(id):
     try:
         u = Usuario.query.get(id)

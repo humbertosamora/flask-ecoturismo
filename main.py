@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_migrate import Migrate
+from flask_cors import CORS
 
 from app.database import db
 from app.dados import prencher_banco_dados
@@ -12,15 +13,23 @@ from app.controllers.usuarios import bp_usuarios
 from app.login_manager import lm
 
 app = Flask(__name__, template_folder="./app/templates", static_folder="./app/static")
+
 app.config.from_object("config")
+
+CORS(app, supports_credentials=True)
+
 db.init_app(app)
+
 lm.init_app(app)
+
 app.register_blueprint(bp_default, url_prefix="/")
 app.register_blueprint(bp_dicas, url_prefix="/dicas")
-app.register_blueprint(bp_docs,url_prefix="/docs")
+app.register_blueprint(bp_docs, url_prefix="/docs")
 app.register_blueprint(bp_empresas, url_prefix="/empresas")
 app.register_blueprint(bp_usuarios, url_prefix="/usuarios")
+
 migrate = Migrate(app, db)
+
 
 # Inserção de dados no BD para teste.
 # Como não há requisição HTTP, então é necessário
