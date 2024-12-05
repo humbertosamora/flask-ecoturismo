@@ -78,7 +78,7 @@ def create():
             )
 
         e = Empresa(nome, cnpj, email, site, instagram, tiktok, youtube, facebook)
-        file = request.files.get("logo")
+        file = request.files.get("imagem")
         if bool(file) and bool(file.filename):
             e.imagem = file.read()
         db.session.add(e)
@@ -110,10 +110,7 @@ def update(id):
                 status=404,
                 mimetype="application/json"
             )
-        fields = [k for k in request.form]                                      
-        values = [request.form[k] for k in request.form]
-        data = dict(zip(fields, values))
-        print(data)
+
         nome = substituir_nulo(request.form.get("nome"), e.nome)
         cnpj = substituir_nulo(request.form.get("cnpj"), e.cnpj)
         email = substituir_nulo(request.form.get("email"), e.email)
@@ -137,7 +134,7 @@ def update(id):
         e.tiktok = tiktok
         e.youtube = youtube
         e.facebook = facebook
-        file = request.files.get("logo")
+        file = request.files.get("imagem")
         if bool(file) and bool(file.filename):
             e.imagem = file.read()
         
